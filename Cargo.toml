@@ -1,0 +1,19 @@
+[package]
+name = "aoc_2021"
+version = "0.1.0"
+author = "Jan Weiß"
+edition = "2021"
+
+[[bin]]
+name = "day_01"
+test = false
+path = "src/bin/day_01.rs"
+
+[[bin]]
+name = "day_02"
+test = false
+path = "src/bin/day_02.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
