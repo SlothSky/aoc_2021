@@ -1,19 +1,15 @@
 [package]
 name = "aoc_2021"
 version = "0.1.0"
-author = "Jan Weiß"
+authors = ["biancoSolutions <implimail@gmail.com>"]
 edition = "2021"
 
 [[bin]]
-name = "day_01"
+name = "main"
 test = false
-path = "src/bin/day_01.rs"
-
-[[bin]]
-name = "day_02"
-test = false
-path = "src/bin/day_02.rs"
+path = "src/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+ansi_term = "0.12.1"
