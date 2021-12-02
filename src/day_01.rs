@@ -26,7 +26,7 @@ fn first_part_01() -> i32 {
     let mut old_value = 0;
 
     for (i, single_value) in sonar_sweep_list.split('\n').enumerate() {
-        let single_value = single_value.parse::<i32>().unwrap();
+        let single_value = single_value.trim().parse::<i32>().unwrap();
         match i {
             0 => old_value = single_value,
             _ => {
@@ -51,7 +51,7 @@ fn second_part_01() -> i32 {
         .expect("Something went wrong writing input to vec");
 
     for single_value in sonar_sweep_string.split('\n') {
-        let single_value = single_value.parse::<i32>().unwrap();
+        let single_value = single_value.trim().parse::<i32>().unwrap();
         sonar_sweep_list.push(single_value);
     }
 
