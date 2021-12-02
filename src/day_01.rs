@@ -6,9 +6,11 @@ use std::io::Read;
 pub fn day_01_main() {
     println!(
         "{}\n\t• {} increases\n\t• {} increases",
-        RGB(204, 204, 0).underline().paint("These are the results for day 1:"),
+        RGB(204, 204, 0)
+            .underline()
+            .paint("These are the results for day 1:"),
         Red.paint(first_part_01().to_string()),
-        Red.paint(second_part_01().to_string()) 
+        Red.paint(second_part_01().to_string())
     )
 }
 
