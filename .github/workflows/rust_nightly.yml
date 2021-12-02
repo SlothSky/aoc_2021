@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install Rust Nightly Toolchain
+      run: rustup toolchain install nightly
     - name: Nightly Rust Build
       run: cargo +nightly test
     - name: Run nightly application
