@@ -1,6 +1,4 @@
-use ansi_term::{
-    Color::{Red, RGB},
-};
+use ansi_term::Color::{Red, RGB};
 // use std::cmp;
 use std::fs;
 // use std::io::Read;
