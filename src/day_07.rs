@@ -1,5 +1,5 @@
 use ansi_term::Color::{Red, RGB};
-use std::{collections::HashMap, fs, ops::Add};
+use std::fs;
 
 pub fn day_07_main() {
     println!(
@@ -19,7 +19,7 @@ fn first_part_07() -> i32 {
     for crab in crab_string.split_terminator(',') {
         crab_vec.push(crab.trim().parse::<i32>().unwrap());
     }
-    crab_vec.sort();
+    crab_vec.sort_unstable();
 
     let mut lowest = i32::MAX;
 
@@ -29,7 +29,9 @@ fn first_part_07() -> i32 {
         for others in &crab_vec {
             temp += i32::abs(others - crab);
         }
-        if temp < lowest { lowest = temp; };
+        if temp < lowest {
+            lowest = temp;
+        };
     }
 
     lowest
@@ -42,18 +44,20 @@ fn second_part_07() -> i64 {
     for crab in crab_string.split_terminator(',') {
         crab_vec.push(crab.trim().parse::<i64>().unwrap());
     }
-    crab_vec.sort();
+    crab_vec.sort_unstable();
 
     let mut lowest = i64::MAX;
 
-    for others in *crab_vec.get(0).unwrap()..*crab_vec.get(crab_vec.len() - 1).unwrap() {
+    for others in *crab_vec.get(0).unwrap()..*crab_vec.last().unwrap() {
         let mut temp = 0;
 
         for crab in &crab_vec {
             let dif = i64::abs(others - crab);
             temp += (dif * (dif + 1)) / 2;
         }
-        if temp < lowest { lowest = temp; };
+        if temp < lowest {
+            lowest = temp;
+        };
     }
 
     lowest

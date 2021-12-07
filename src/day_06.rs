@@ -1,4 +1,5 @@
 use ansi_term::Color::{Red, RGB};
+use crossterm::{cursor, QueueableCommand};
 use plotters::{
     self,
     prelude::{
@@ -9,9 +10,8 @@ use plotters::{
 };
 use plotters_backend::BackendColor;
 use std::fs;
+use std::io::{stdout, Write};
 use std::{thread, time};
-use std::io::{Write, stdout};
-use crossterm::{QueueableCommand, cursor};
 
 #[derive(Debug)]
 struct Fish {
@@ -19,7 +19,6 @@ struct Fish {
 }
 
 pub fn day_06_main() {
-    /*
     println!(
         "\n{}\n\t• Amount of fish after 80 days: {}\n\t• Amount of fish after 256 days: {}",
         RGB(204, 204, 0)
@@ -27,16 +26,17 @@ pub fn day_06_main() {
             .paint("These are the results for day 6:"),
         Red.paint(_first_part_06().to_string()),
         Red.paint(second_part_06().to_string())
-    )*/
+    );
+
     let graph_string = fs::read_to_string("assets/06/init_graph.txt").unwrap();
 
     let mut stdout = stdout();
     println!("\n");
     for line in graph_string.lines() {
-        stdout.queue(cursor::SavePosition);
-        stdout.write(format!("{}\n", line).as_bytes());
+        stdout.queue(cursor::SavePosition).unwrap();
+        stdout.write_all(format!("{}\n", line).as_bytes()).unwrap();
         // stdout.queue(cursor::RestorePosition);
-        stdout.flush();
+        stdout.flush().unwrap();
         thread::sleep(time::Duration::from_millis(100));
     }
 }
@@ -86,18 +86,24 @@ fn second_part_06() -> i64 {
         .fill(&BLACK)
         .expect("Something went wrong with filling the root area");
     let root_area = root_area
-        .titled("Fishes over time", TextStyle {
-            color: BackendColor { alpha: 1.0, rgb: (206, 206, 206) },
-            font: FontDesc::new(
-                plotters_backend::FontFamily::Monospace, 
-                30.0, 
-                FontStyle::Normal,
-            ),
-            pos: Pos {
-                h_pos: plotters_backend::text_anchor::HPos::Center,
-                v_pos: plotters_backend::text_anchor::VPos::Center,
-            }
-        })
+        .titled(
+            "Fishes over time",
+            TextStyle {
+                color: BackendColor {
+                    alpha: 1.0,
+                    rgb: (206, 206, 206),
+                },
+                font: FontDesc::new(
+                    plotters_backend::FontFamily::Monospace,
+                    30.0,
+                    FontStyle::Normal,
+                ),
+                pos: Pos {
+                    h_pos: plotters_backend::text_anchor::HPos::Center,
+                    v_pos: plotters_backend::text_anchor::VPos::Center,
+                },
+            },
+        )
         .expect("Something went wrong with setting the root area's title.");
     let x_axis = (0f32..180f32).step(0.5);
 
@@ -173,9 +179,7 @@ fn second_part_06() -> i64 {
         fish_list[6] += fish_list[8];
     }
 
-    let fish_counter = count_fishes(fish_list);
-
-    fish_counter
+    count_fishes(fish_list)
 }
 
 fn count_fishes(fish_list: [i64; 9]) -> i64 {
