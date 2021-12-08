@@ -17,7 +17,7 @@ fn first_part_08() -> i32 {
     let mut digit_vec = Vec::new();
 
     for digits in digit_string.lines() {
-        for (index, digit) in digits.split_terminator(" | ").into_iter().enumerate() {
+        for (index, digit) in digits.split(" | ").into_iter().enumerate() {
             if index == 1 {
                 for signal in digit.split_whitespace() {
                     if signal.len() == 2
