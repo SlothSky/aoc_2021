@@ -90,9 +90,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                 6 => {
                     let mut counter = 0;
                     for ch in digit.chars() {
-                        match result.get(&7).or(Some(&"zzz")).unwrap().rfind(ch) {
-                            Some(_) => counter += 1,
-                            None => (),
+                        if result.get(&7).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                            counter += 1;
                         }
                     }
 
@@ -101,9 +100,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                     } else {
                         counter = 0;
                         for ch in digit.chars() {
-                            match result.get(&4).or(Some(&"zzz")).unwrap().rfind(ch) {
-                                Some(_) => counter += 1,
-                                None => (),
+                            if result.get(&4).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                                counter += 1;
                             }
                         }
 
@@ -117,9 +115,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                 5 => {
                     let mut counter = 0;
                     for ch in digit.chars() {
-                        match result.get(&1).or(Some(&"zzz")).unwrap().rfind(ch) {
-                            Some(_) => counter += 1,
-                            None => (),
+                        if result.get(&1).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                            counter += 1;
                         }
                     }
 
@@ -128,9 +125,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                     } else {
                         counter = 0;
                         for ch in digit.chars() {
-                            match result.get(&9).or(Some(&"zzz")).unwrap().rfind(ch) {
-                                Some(_) => counter += 1,
-                                None => (),
+                            if result.get(&9).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                                counter += 1;
                             }
                         }
 
