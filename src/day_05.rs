@@ -179,25 +179,23 @@ fn second_part_05() -> i32 {
                         counter_1 -= 1;
                     }
                 }
+            } else if coordinates.0 .0 > coordinates.1 .0 {
+                let mut counter_0 = coordinates.0 .0;
+                let mut counter_1 = coordinates.0 .1;
+                while counter_0 >= coordinates.1 .0 {
+                    let list_point = heat_map.entry((counter_0, counter_1)).or_insert(0);
+                    *list_point += 1;
+                    counter_0 -= 1;
+                    counter_1 += 1;
+                }
             } else {
-                if coordinates.0 .0 > coordinates.1 .0 {
-                    let mut counter_0 = coordinates.0 .0;
-                    let mut counter_1 = coordinates.0 .1;
-                    while counter_0 >= coordinates.1 .0 {
-                        let list_point = heat_map.entry((counter_0, counter_1)).or_insert(0);
-                        *list_point += 1;
-                        counter_0 -= 1;
-                        counter_1 += 1;
-                    }
-                } else {
-                    let mut counter_0 = coordinates.0 .0;
-                    let mut counter_1 = coordinates.0 .1;
-                    while counter_0 <= coordinates.1 .0 {
-                        let list_point = heat_map.entry((counter_0, counter_1)).or_insert(0);
-                        *list_point += 1;
-                        counter_0 += 1;
-                        counter_1 += 1;
-                    }
+                let mut counter_0 = coordinates.0 .0;
+                let mut counter_1 = coordinates.0 .1;
+                while counter_0 <= coordinates.1 .0 {
+                    let list_point = heat_map.entry((counter_0, counter_1)).or_insert(0);
+                    *list_point += 1;
+                    counter_0 += 1;
+                    counter_1 += 1;
                 }
             }
         }
