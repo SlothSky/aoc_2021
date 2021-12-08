@@ -38,11 +38,11 @@ fn second_part_08() -> i32 {
     for digits in digit_string.lines() {
         let test: Vec<&str> = digits.split_terminator(" | ").collect();
         let mut result = String::new();
-        let temp = &search_numbers(test[0].trim());
+        let temp = search_numbers(test[0].trim());
 
         for signal in test[1].split_whitespace() {
             let signal = signal.trim();
-            for (index, (key, value)) in temp.into_iter().enumerate() {
+            for (index, (key, value)) in temp.iter().enumerate() {
                 let mut counter = 0;
                 for ch in signal.chars() {
                     if value.contains(ch) {
