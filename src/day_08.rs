@@ -1,5 +1,5 @@
 use ansi_term::Color::{Red, RGB};
-use std::{fs, collections::HashMap};
+use std::{collections::HashMap, fs};
 
 pub fn day_08_main() {
     println!(
@@ -20,8 +20,12 @@ fn first_part_08() -> i32 {
         for (index, digit) in digits.split_terminator(" | ").into_iter().enumerate() {
             if index == 1 {
                 for signal in digit.split_whitespace() {
-                    if signal.len() == 2 || signal.len() == 3 || signal.len() == 4 || signal.len() == 7 { 
-                        digit_vec.push(signal); 
+                    if signal.len() == 2
+                        || signal.len() == 3
+                        || signal.len() == 4
+                        || signal.len() == 7
+                    {
+                        digit_vec.push(signal);
                     }
                 }
             }
@@ -36,7 +40,7 @@ fn second_part_08() -> i64 {
     // let mut digit_vec = Vec::new();
 
     for digits in digit_string.lines() {
-        let test: Vec<&str> = digits.split_terminator(" | ").collect(); 
+        let test: Vec<&str> = digits.split_terminator(" | ").collect();
         let mut result = String::new();
         let temp = &search_numbers(test[0].trim());
 
@@ -52,11 +56,11 @@ fn second_part_08() -> i64 {
                 if counter == value.len() && counter == signal.len() {
                     result.push_str(&(key.to_string()));
                 }
-            println!("SIGNAL {}", result);
+                println!("SIGNAL {}", result);
             }
         }
     }
-    
+
     4
 }
 
@@ -64,21 +68,20 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
     let mut result = HashMap::new();
 
     while result.len() < 10 {
-
         for digit in digit_input.split_whitespace() {
             match digit.len() {
                 2 => {
-                    result.entry(1).or_insert( digit);
-                },
+                    result.entry(1).or_insert(digit);
+                }
                 3 => {
-                    result.entry(7).or_insert( digit);
-                },
+                    result.entry(7).or_insert(digit);
+                }
                 4 => {
-                    result.entry(4).or_insert( digit);
-                },
+                    result.entry(4).or_insert(digit);
+                }
                 7 => {
-                    result.entry(8).or_insert( digit);
-                },
+                    result.entry(8).or_insert(digit);
+                }
                 6 => {
                     let mut counter = 0;
                     for ch in digit.chars() {
@@ -104,9 +107,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                         } else {
                             result.entry(0).or_insert(digit);
                         }
-                        
-                    } 
-                },
+                    }
+                }
                 5 => {
                     let mut counter = 0;
                     for ch in digit.chars() {
@@ -133,8 +135,7 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                             result.entry(5).or_insert(digit);
                         }
                     }
-
-                },
+                }
                 _ => println!("Unknown pattern occured"),
             }
         }
