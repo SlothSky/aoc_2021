@@ -17,14 +17,10 @@ fn first_part_08() -> i32 {
     let mut digit_vec = Vec::new();
 
     for digits in digit_string.lines() {
-        for (index, digit) in digits.split_terminator(" | ").into_iter().enumerate() {
+        for (index, digit) in digits.split(" | ").into_iter().enumerate() {
             if index == 1 {
                 for signal in digit.split_whitespace() {
-                    if signal.len() == 2
-                        || signal.len() == 3
-                        || signal.len() == 4
-                        || signal.len() == 7
-                    {
+                    if matches!(signal.len(), 2 | 3 | 4 | 7) {
                         digit_vec.push(signal);
                     }
                 }
@@ -42,11 +38,11 @@ fn second_part_08() -> i32 {
     for digits in digit_string.lines() {
         let test: Vec<&str> = digits.split_terminator(" | ").collect();
         let mut result = String::new();
-        let temp = &search_numbers(test[0].trim());
+        let temp = search_numbers(test[0].trim());
 
         for signal in test[1].split_whitespace() {
             let signal = signal.trim();
-            for (index, (key, value)) in temp.into_iter().enumerate() {
+            for (index, (key, value)) in temp.iter().enumerate() {
                 let mut counter = 0;
                 for ch in signal.chars() {
                     if value.contains(ch) {
@@ -94,9 +90,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                 6 => {
                     let mut counter = 0;
                     for ch in digit.chars() {
-                        match result.get(&7).or(Some(&"zzz")).unwrap().rfind(ch) {
-                            Some(_) => counter += 1,
-                            None => (),
+                        if result.get(&7).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                            counter += 1;
                         }
                     }
 
@@ -105,9 +100,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                     } else {
                         counter = 0;
                         for ch in digit.chars() {
-                            match result.get(&4).or(Some(&"zzz")).unwrap().rfind(ch) {
-                                Some(_) => counter += 1,
-                                None => (),
+                            if result.get(&4).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                                counter += 1;
                             }
                         }
 
@@ -121,9 +115,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                 5 => {
                     let mut counter = 0;
                     for ch in digit.chars() {
-                        match result.get(&1).or(Some(&"zzz")).unwrap().rfind(ch) {
-                            Some(_) => counter += 1,
-                            None => (),
+                        if result.get(&1).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                            counter += 1;
                         }
                     }
 
@@ -132,9 +125,8 @@ fn search_numbers(digit_input: &str) -> HashMap<i32, &str> {
                     } else {
                         counter = 0;
                         for ch in digit.chars() {
-                            match result.get(&9).or(Some(&"zzz")).unwrap().rfind(ch) {
-                                Some(_) => counter += 1,
-                                None => (),
+                            if result.get(&9).or(Some(&"zzz")).unwrap().rfind(ch).is_some() {
+                                counter += 1;
                             }
                         }
 
